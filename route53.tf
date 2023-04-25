@@ -8,9 +8,9 @@ resource "aws_route53_zone" "mydomain_com" {
 # extract the hostnames and corresponding ips from the local file as local vars
 # create a map of IP addresses and DNS names then 
 locals {
-  file_contents = file("byip.txt")
-  split_lines   = split("\n", local.file_contents)
-  split_values  = [split(",", local.split_lines[0]), split(",", local.split_lines[1])]
+  file_contents  = file("byip.txt")
+  split_lines    = split("\n", local.file_contents)
+  split_values   = [split(",", local.split_lines[0]), split(",", local.split_lines[1])]
   map_of_records = { for idx, val in local.split_values[0] : val => local.split_values[1][idx] }
 }
 
